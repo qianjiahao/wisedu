@@ -10,6 +10,7 @@ import FastClick from 'fastclick'
 {{#useNativeSDK}}
 import init from 'bh-mixin-sdk'
 import api from './config/api'
+import host from './config/host'
 {{/useNativeSDK}}
 document.addEventListener('DOMContentLoaded', function () {
   FastClick.attach(document.body)
