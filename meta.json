@@ -1,0 +1,14 @@
+{
+  "prompts": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "label": "Project name"
+    },
+    "useNativeSDK": {
+      "type": "confirm",
+      "message": "use native SDK ?"
+    }
+  },
+  "completeMessage": "To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dev"
+}
