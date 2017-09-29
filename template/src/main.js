@@ -9,6 +9,7 @@ import Mint from 'bh-mint-ui2'
 import FastClick from 'fastclick'
 {{#useNativeSDK}}
 import init from 'bh-mixin-sdk'
+import api from './config/api'
 {{/useNativeSDK}}
 document.addEventListener('DOMContentLoaded', function () {
   FastClick.attach(document.body)
@@ -23,7 +24,7 @@ Vue.config.productionTip = false
 global.SDK = null
 
 function getSDKConfig () {
-  return new Promise ((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     let config = {
       // 微信sdk初始化参数
       wx: {
@@ -35,9 +36,9 @@ function getSDKConfig () {
          * uploadImgsToEmapUrl 参数 就是步骤2中 将serverId发送到应用服务的请求接口
          */
         // TODO: 上传接口
-        uploadImgsToEmapUrl: WEBPACK_CONIFG_HOST + '/sys/yxapp/WechatServiceStu/saveFileFromWechat.do' //TODO: 上传接口
+        uploadImgsToEmapUrl: '/sys/yxapp/WechatServiceStu/saveFileFromWechat.do' // TODO: 上传接口
       },
-      dd: {}, //钉钉jdk初始化参数
+      dd: {}, // 钉钉jdk初始化参数
     }
     if (/micromessenger/.test(navigator.userAgent.toLowerCase())) {
       /**
@@ -48,22 +49,21 @@ function getSDKConfig () {
        * signature - 签名
        */
       // TODO: 发请求获取微信签名
-      config.wx.url = 'http://res.wisedu.com:9090/checkSign'
-      utils.Get(api.getWechatSign, { configurl: window.location.href.replace(/#(\S+)?/, '') }).then(({
+      api.get(host.wxCheckSign, { configurl: window.location.href.replace(/#(\S+)?/, '') }).then(({
         data: resp
       }) => {
-        if (resp.code == '0') {
+        if (resp.code === '0') {
           let signData = resp.data
           signData.corpId = signData.corpid
           signData.nonceStr = signData.noncestr
           config.wx.signData = signData
           resolve(config)
         } else {
-          Toast('微信jsdk初始化失败 ' + resp.code)
+          Mint.Toast('微信jsdk初始化失败 ' + resp.code)
           reject(resp)
         }
       }, () => {
-        Toast('微信jsdk初始化失败')
+        Mint.Toast('微信jsdk初始化失败')
         reject()
       })
     } else {
