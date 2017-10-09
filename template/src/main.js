@@ -39,7 +39,7 @@ function getSDKConfig () {
         // TODO: 上传接口
         uploadImgsToEmapUrl: '/sys/yxapp/WechatServiceStu/saveFileFromWechat.do' // TODO: 上传接口
       },
-      dd: {}, // 钉钉jdk初始化参数
+      dd: {} // 钉钉jdk初始化参数
     }
     if (/micromessenger/.test(navigator.userAgent.toLowerCase())) {
       /**
