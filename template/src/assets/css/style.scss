@@ -1,3 +1,11 @@
+$theme-title: #1c2438;
+$theme-content: #495060;
+$theme-sub: #80848f;
+$theme-disabled: #bbbec4;
+$theme-border: #dddee1;
+$theme-divider: #e9eaec;
+$theme-bg: #f8f8f9;
+
 @mixin transition ($property: all, $duration: 0.2s, $function: ease-in-out, $delay: 0) {
   transition-property: $property;
   transition-duration: $duration;

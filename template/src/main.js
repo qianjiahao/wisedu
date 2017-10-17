@@ -3,14 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import './assets/css/bh-scenes.min.css'
-import './assets/css/bh.min.css'
 import Mint from 'bh-mint-ui2'
 import FastClick from 'fastclick'
 {{#useNativeSDK}}
 import init from 'bh-mixin-sdk'
 import api from './config/api'
-import host from './config/host'
+import URL from './config/url'
+import './assets/css/style.scss'
 {{/useNativeSDK}}
 document.addEventListener('DOMContentLoaded', function () {
   FastClick.attach(document.body)
@@ -50,7 +49,7 @@ function getSDKConfig () {
        * signature - 签名
        */
       // TODO: 发请求获取微信签名
-      api.get(host.wxCheckSign, { configurl: window.location.href.replace(/#(\S+)?/, '') }).then(({
+      api.get(URL.wxCheckSign, { configurl: window.location.href.replace(/#(\S+)?/, '') }).then(({
         data: resp
       }) => {
         if (resp.code === '0') {
